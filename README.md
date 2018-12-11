@@ -334,11 +334,85 @@ ES6声明变量的六种方法：
 
 ```
 7、数组的扩展
-    扩展运算符：
-        
+    扩展运算符：...
+        将一个数组转化为用逗号分隔的参数序列
+    ...[1,2,3]=[1,2,3]
+
     Math.max.apply(null,[1,2,3])
     =Math.max(...[1,2,3])
     =Math.max(1,2,3)
+
+    arr1.push(...arr2)
+
+    复制数组：
+        const [...a2]=a1
+    合并数组：
+        [...a1,...a2,...a3]
+    扩展运算符和解构合并使用：
+        扩展运算符只能放在参数的最后一位。
+        [a,...arr]=[1,2,3,4,5,6] //a=1 arr=[2,3,4,5,6]
+    字符串：
+        将字符串转化为真正的数组
+        [...'test']  //['t','e','s','t']
+    实现了Interator接口的对象：
+    Map、Set结构、Generator函数都有Interator接口
+    Array.from()：
+        将两类对象真正转化为数组；
+        有length属性的对象;
+    Array.of():
+        用于将一组值，转换为数组；
+        没有参数，返回空数组；
+    copyWithin()：
+        数组实例，将指定位置的成员复制到其他位置，返回当前数组；
+        Array.prototype.copyWithin(target,start=0,end=this.length)
+            target：必须，该位置开始替换数据；
+            start：可选，该位置读取数据；默认0；
+            end：可选，该位置停止读取；默认数组长度；
+            (负值表示倒数)
+        eg：[1,2,3,4,5].copyWithin(0,3)    //[4,5,3,4,5]
+    find()和findIndex()：
+        find()：
+            找出第一个符合条件的数组成员；无符合条件的，返回undefined；
+        findIndex()：
+            返回第一个符合条件的数组成员的位置，无符合条件的，返回-1；
+    fill():
+        使用给定值，填充一个数组；
+        第二个参数：其实位置；
+        第三个参数：结束位置；
+    entries()、keys()、values()：
+        遍历数组；
+        keys()：对键名遍历；
+        values()：键值遍历；
+        entries()：键值对遍历；
+    includes()：
+        布尔值；
+        第二个参数默认0；负值表示倒数，大于数组长度时，重置从0开始；
+        区别：
+        has():Map结构的has(),查找键名
+            Set结构的has(),查找值；
+    flat()、flatMap()：
+        flat()：将嵌套的数组 拉平，变成一维数组；
+                参数表示想要拉平的参数；
+                Infinity无论多少层都可以；
+                跳过空位；
+        flatMap()：
+                对数组的每个成员执行一个函数，然后返回值组成的数组执行flat()方法；
+                只能展开一层数组；
+    数组的空位：
+        空位不是undefined，是没有任何值；
+        
+        将空位转为undefined：
+            Array.from()
+            ...
+            entries()
+            keys()
+            values()
+            find()
+            findIndex()
+        copyWithin()：将空位一起拷贝；
+        fill()：将空位视为正常数组；
+        for...of遍历空位；
+           
 ```
 ### 11、Set和Map数据结构
 ```
