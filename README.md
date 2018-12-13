@@ -334,7 +334,8 @@ ES6声明变量的六种方法：
 
 ```
 7、数组的扩展
-    扩展运算符：...
+
+1）、扩展运算符：...
         将一个数组转化为用逗号分隔的参数序列
     ...[1,2,3]=[1,2,3]
 
@@ -344,25 +345,29 @@ ES6声明变量的六种方法：
 
     arr1.push(...arr2)
 
-    复制数组：
+2）、复制数组：
         const [...a2]=a1
     合并数组：
         [...a1,...a2,...a3]
     扩展运算符和解构合并使用：
         扩展运算符只能放在参数的最后一位。
         [a,...arr]=[1,2,3,4,5,6] //a=1 arr=[2,3,4,5,6]
-    字符串：
+
+3）、字符串：
         将字符串转化为真正的数组
         [...'test']  //['t','e','s','t']
     实现了Interator接口的对象：
     Map、Set结构、Generator函数都有Interator接口
-    Array.from()：
+
+4）、Array.from()：
         将两类对象真正转化为数组；
         有length属性的对象;
-    Array.of():
+
+5）、Array.of():
         用于将一组值，转换为数组；
         没有参数，返回空数组；
-    copyWithin()：
+    
+6）、copyWithin()：
         数组实例，将指定位置的成员复制到其他位置，返回当前数组；
         Array.prototype.copyWithin(target,start=0,end=this.length)
             target：必须，该位置开始替换数据；
@@ -370,27 +375,32 @@ ES6声明变量的六种方法：
             end：可选，该位置停止读取；默认数组长度；
             (负值表示倒数)
         eg：[1,2,3,4,5].copyWithin(0,3)    //[4,5,3,4,5]
-    find()和findIndex()：
+    
+7）、find()和findIndex()：
         find()：
             找出第一个符合条件的数组成员；无符合条件的，返回undefined；
         findIndex()：
             返回第一个符合条件的数组成员的位置，无符合条件的，返回-1；
-    fill():
+    
+8）、fill():
         使用给定值，填充一个数组；
         第二个参数：其实位置；
         第三个参数：结束位置；
-    entries()、keys()、values()：
+    
+9）、entries()、keys()、values()：
         遍历数组；
         keys()：对键名遍历；
         values()：键值遍历；
         entries()：键值对遍历；
-    includes()：
+    
+10）、includes()：
         布尔值；
         第二个参数默认0；负值表示倒数，大于数组长度时，重置从0开始；
         区别：
         has():Map结构的has(),查找键名
             Set结构的has(),查找值；
-    flat()、flatMap()：
+    
+11）、flat()、flatMap()：
         flat()：将嵌套的数组 拉平，变成一维数组；
                 参数表示想要拉平的参数；
                 Infinity无论多少层都可以；
@@ -398,7 +408,8 @@ ES6声明变量的六种方法：
         flatMap()：
                 对数组的每个成员执行一个函数，然后返回值组成的数组执行flat()方法；
                 只能展开一层数组；
-    数组的空位：
+
+12）、数组的空位：
         空位不是undefined，是没有任何值；
         
         将空位转为undefined：
@@ -414,6 +425,68 @@ ES6声明变量的六种方法：
         for...of遍历空位；
            
 ```
+
+```
+8、对象的扩展
+
+1）、属性的简洁表示法
+    对象之中，直接写入变量，属性名为变量名，属性值为变量的值；
+
+2）、方法的name属性
+    返回函数名
+
+    取值函数getter、存值函数setter：
+        name属性为该该方法的属性的描述对象，返回时方法名加上get和set；  
+    bind：name返回bound加上原函数的名字；
+    Function构造函数创造的函数，name返回anonymous；
+    Symbol：name返回Symbol值的描述；
+
+3）、属性的可枚举性和遍历
+    可枚举性：
+        Object.getOwnPropertyDescriptor()： 
+            获取该属性的描述对象；
+        描述对象的enumerable属性，称为“可枚举性”
+        若该属性为false，表示某些操作忽略当前属性：
+            for...in
+            Object.keys()
+            JSON.stringify()
+            Object.assign()
+        所有class的原型的方法是不可枚举的；
+
+    for...in：
+        遍历对象自身和继承的可枚举属性
+    Object.keys(obj)、Object.getOwnPropertyNames(obj)、Object.getOwnPropertySymbols(obj)、Reflect.ownKeys(obj):
+        返回一个数组，包括对象自身的的________的键名
+        Object.keys(obj)：所有可枚举属性，不含继承的，不含Symbol属性；
+        Object.getOwnPropertyNames(obj)：不含Symbol属性，包含不可枚举的；
+        Object.getOwnPropertySymbols(obj)：所有Symbol属性；
+        Reflect.ownKeys(obj):所有的；
+    遍历次序规则：
+        数值键，升序
+        字符串键，加入时间升序
+        Symbol键，加入时间升序
+4)、super关键字
+    指向当前对象的原型对象，只能用在对象的方法之中
+
+5）、解构赋值
+    对象的解构赋值：
+        左边对象 右边对象；
+        解构赋值必须最后一个参数；
+        浅拷贝，即如果一个键的值是符合类型的值，拷贝的是这个值得引用；
+        扩展运算符的解构赋值，不能复制继承自原型对象的属性；
+        扩展运算符后面必须是一个变量名，不能是表达式
+    扩展运算符：
+        对象的...=Object.assign()；
+        合并两个对象；
+        自定义属性，放在扩展运算符后面，扩展运算符内部的同名属性会被覆盖掉；
+                              前面，设置了新对象的默认属性值；
+        后面可以跟表达式；
+        ...后面空对象，无效果；
+        参数是null、undefined，会被忽略，不报错；
+        
+
+```
+
 ### 11、Set和Map数据结构
 ```
 1、Set
