@@ -482,8 +482,52 @@ ES6声明变量的六种方法：
                               前面，设置了新对象的默认属性值；
         后面可以跟表达式；
         ...后面空对象，无效果；
-        参数是null、undefined，会被忽略，不报错；
-        
+        参数是null、undefined，会被忽略，不报错；    
+
+```
+```
+9、对象的新增方法
+
+1）、Object.is():
+    === : 严格相等
+    区别：
+        +0 === -0 //true  NaN === NaN //false
+        Object.is(+0,-0) //false Object.is(NaN,NaN) //true
+
+2)、Object.assign()
+    对象合并，源对象所有可枚举属性，复制到目标对象；
+        第一个参数是目标对象，其余都是源对象；
+        同名属性，后面覆盖前面的；
+        只有一个参数，返回参数；
+        参数不是对象，先转成对象；
+        undefined null无法转对象；不在首参数，不会报错；
+    浅拷贝
+    同名属性替换；
+    数组的处理；
+    取值函数的处理；
+
+    用途：
+        为对象添加属性；
+        为对象添加方法；
+        克隆对象；
+        合并多个对象；
+        为属性指定默认值；
+
+3）、Object.getOwnPropertyDescriptors():
+    返回某个对象属性的描述对象；
+
+4）、_proto_、Object.setPrototypeOf()、Object.getPrototypeOf()
+    _proto_属性：
+        读取或设置当前对象的prototype对象；
+    Object.setPrototypeOf()：
+        写操作
+    Object.getPrototypeOf()：
+        读操作
+    Object.create()：
+        生成操作
+    
+    
+
 
 ```
 
