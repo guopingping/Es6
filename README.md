@@ -525,9 +525,17 @@ ES6声明变量的六种方法：
         读操作
     Object.create()：
         生成操作
-    
-    
 
+    Object.keys():
+        返回一个数组，所有可遍历的属性的键名；
+    Object.values():
+        返回一个数组，所有可遍历属性的键值；
+        过滤属性名为Symbol值得属性；
+    Object.entries():
+        返回一个数组，所有可遍历属性的键值对数组；
+        过滤属性名为Symbol值得属性；
+    Object.fromEntries():
+        将键值对数组转化为对象；
 
 ```
 
