@@ -621,6 +621,11 @@ JSON转为Map：
         deleteProperty()：拦截delete操作
         defineProperty()：拦截Object.defineProperty
 
+    this:
+        Proxy代理的情况下，目标对象内部的this关键字会指向Proxy代理。
+
+    web服务的客户端
+    
 ```
 ### 14、Promise对象
 ```
