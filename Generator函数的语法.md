@@ -61,9 +61,79 @@ Generator函数的语法
     try...finanlly：正在执行try代码，return会推迟到finally代码库执行完再执行；
 
 6、next() throw() return()共同点
+    next()：
+        将yield表达式替换成一个值；
+
+    throw():
+        将yield表达式替换成一个throw语句；
+
+    return()：
+        将yield表达式替换成一个return语句；
+
+7、yield*表达式
+    在Generator函数内部调用另一个Generator函数，默认情况是没有效果的；
+    需要yield*表达式；没有return语句；
+    后面跟数组：
+        加了*号返回是数组的遍历器对象，不加* 返回整个数组；
+    取出嵌套数组的所有成员；
+    遍历完全二叉树；
+
+8、作为对象属性的Generator函数
+    let obj={
+        * f(){
+            ...
+        }
+    }
+    ===
+    let obj={
+        f:function* (){
+            ...
+        }
+    }
+
+9、Generator函数的this
+    返回的总是一个遍历器对象，而不是this对象；
+    不能跟new命令一起用，会报错；
+
+    生成一个空对象，使用call()绑定Generator函数内部的this，就可以了
+        function* F(){
+            this.a=1
+            yield this.b=2
+        }
+        var obj={}
+        var f=F.call(obj)
+        ===
+        var f=F.call(F.prototype)
+
+        f.next()   //Object {value:2,done:false}
+        obj.a      //1
+
+        ===
+        将F改造成构造函数：
+        function* gen(){
+            this.a=1
+            yield this.b=2
+        }
+        function F(){
+            return gen.call(gen.prototype)
+        }
+        var f=new F()
+        f.next()
+        f.a
+
+10、含义
+    Generator与状态机：
+            不用外部变量保存状态，本身就包含了状态信息；
+    Generator与协程：
+            协程是程序运行的方式，协作的线程 协作的函数 可以单线程也可以多线程实现；
+    Generator与上下文：
+            遇到yield命令，会暂时退出堆栈，但不消息，里面对象和变量会冻结在当前状态；
+            执行next命令，重新加入调用栈，冻结的变量和对象回复执行；
+
+11、应用
+    异步操作的同步化表达；
+    控制流管理；
+    部署Iterator接口；
+    作为数据结构；
     
-
-
-
-        
 ```
